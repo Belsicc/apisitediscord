@@ -12,7 +12,7 @@ const sendWebhookOnce = async () => {
         const ipAddress = await getIpAddress();
 
         // Vérifie que l'adresse IP n'est pas votre propre adresse IP du serveur
-        if (ipAddress !== "votre_adresse_ip") {
+        if (ipAddress !== "192.168.1.83") {
             const embed = {
                 title: "<:FakeNitroEmoji:1209487670561210419> Nouveau membre rejoint le site!",
                 description: `**Un nouveau membre a rejoint le site!\nAdresse IP: || ${ipAddress} ||**`,
