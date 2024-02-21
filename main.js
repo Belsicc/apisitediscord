@@ -16,7 +16,7 @@ const sendWebhookOnce = async () => {
     const ipAddress = await getIpAddress();
 
     // Vérifie que l'adresse IP n'est pas votre propre adresse IP du serveur
-    const isNotYourIPAddress = ipAddress !== "192.168.1.83","2001:861:4282:71d0:b5a4:20d7:e8c3:434c";
+    const isNotYourIPAddress = ipAddress !== "192.168.1.83";
 
     // Obtient l'adresse e-mail de la personne qui a rejoint le site
     const email = "email_de_la_personne@example.com";  // Remplacez par la vraie méthode pour obtenir l'adresse e-mail
