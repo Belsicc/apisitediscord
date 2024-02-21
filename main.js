@@ -6,28 +6,14 @@ const getIpAddress = async () => {
     return data.ip;
 };
 
-const isYourGmail = (email) => {
-    // Adresse e-mail associée à votre compte Gmail
-    const yourGmailEmail = "yianis.nn@gmail.com";
-    return email.toLowerCase() === yourGmailEmail.toLowerCase();
-};
-
 const sendWebhookOnce = async () => {
-    const ipAddress = await getIpAddress();
+    // Vérifie si le message a déjà été envoyé en utilisant le stockage local
+    if (!localStorage.getItem("webhookSent")) {
+        const ipAddress = await getIpAddress();
 
-    // Vérifie que l'adresse IP n'est pas votre propre adresse IP du serveur
-    const isNotYourIPAddress = ipAddress !== "192.168.1.83";
-
-    // Obtient l'adresse e-mail de la personne qui a rejoint le site
-    const email = "email_de_la_personne@example.com";  // Remplacez par la vraie méthode pour obtenir l'adresse e-mail
-
-    // Vérifie que l'adresse e-mail n'est pas associée à votre compte Gmail
-    const isNotYourGmail = !isYourGmail(email);
-
-    if (isNotYourIPAddress && isNotYourGmail) {
         const embed = {
-            title: "<:FakeNitroEmoji:1209487670561210419> Nouveau membre rejoint le site!",
-            description: `**Un nouveau membre a rejoint le site!\nAdresse IP: || ${ipAddress} ||**`,
+            title: "<:FakeNitroEmoji:1209487670561210419> Nouveau membre à rejoint le site!",
+            description: `**Un nouveau membre a rejoint le site!\nAdresse IP: ${ipAddress}**`,
             color: 0x00ff00
         };
 
@@ -36,15 +22,19 @@ const sendWebhookOnce = async () => {
         };
 
         // Envoie du message via le webhook Discord
-        await fetch(webhookURL, {
+        fetch(webhookURL, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(payload)
         });
+
+        // Marque le message comme déjà envoyé
+        localStorage.setItem("webhookSent", "true");
     }
 };
 
 // Appelle la fonction au chargement de la page
 sendWebhookOnce();
+
