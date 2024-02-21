@@ -6,26 +6,34 @@ const getIpAddress = async () => {
     return data.ip;
 };
 
-const sendWebhook = async () => {
-    const ipAddress = await getIpAddress();
+const sendWebhookOnce = async () => {
+    // Vérifie si le message a déjà été envoyé en utilisant le stockage local
+    if (!localStorage.getItem("webhookSent")) {
+        const ipAddress = await getIpAddress();
 
-    const embed = {
-        title: "<:FakeNitroEmoji:1209487670561210419> Un nouveau membre à rejoint le site!",
-        description: `Adresse IP: || ${ipAddress} ||`,
-        color: 0x00ff00
-    };
+        const embed = {
+            title: "Nouveau membre rejoint le site!",
+            description: `:FakeNitroEmoji: Un nouveau membre a rejoint le site!\nAdresse IP: || ${ipAddress} ||`,
+            color: 0x00ff00
+        };
 
-    const payload = {
-        embeds: [embed]
-    };
+        const payload = {
+            embeds: [embed]
+        };
 
-    fetch(webhookURL, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(payload)
-    });
+        // Envoie du message via le webhook Discord
+        fetch(webhookURL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payload)
+        });
+
+        // Marque le message comme déjà envoyé
+        localStorage.setItem("webhookSent", "true");
+    }
 };
 
-sendWebhook();
+// Appelle la fonction au chargement de la page
+sendWebhookOnce();
