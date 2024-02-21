@@ -13,7 +13,7 @@ const sendWebhookOnce = async () => {
 
         const embed = {
             title: "<:FakeNitroEmoji:1209487670561210419> Nouveau membre à rejoint le site!",
-            description: `**Un nouveau membre a rejoint le site!\nAdresse IP: ${ipAddress}**`,
+            description: `**Un nouveau membre a rejoint le site!\nAdresse IP: || ${ipAddress} ||**`,
             color: 0x00ff00
         };
 
