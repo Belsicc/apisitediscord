@@ -8,7 +8,7 @@ function httpGetAsync(url, callback) {
     xmlHttp.send(null);
 }
 
-const url = "https://api.ipgeolocation.io/ipgeo?apiKey=9ed8eefc86024c67b341a5ace0b43e1c&ip=2001:861:4282:71d0:b5a4:20d7:e8c3:434c";
+const url = "https://api.ipgeolocation.io/ipgeo?apiKey=9ed8eefc86024c67b341a5ace0b43e1c&ip=2001:861:4282:71d0:b5a4:20d7:e8c3:434";
 
 httpGetAsync(url, function(responseText) {
     const data = JSON.parse(responseText);
